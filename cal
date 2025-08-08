@@ -1,0 +1,53 @@
+from tkinter import messagebox
+from tkinter import *
+
+def calculate():
+    num1 = float(entry1.get())
+    num2 = float(entry2.get())
+    op = operator.get()
+    
+
+    try:
+        if op == "+":
+            result = num1+num2
+        elif op == "-":
+            result = num1-num2
+        elif op == "*":
+            result =num1*num2
+        elif op == "/":
+            if num2 == 0:
+               
+                messagebox.showerror("Error", "cannot divide zero")
+            else :
+                result = num1/num2    
+        
+        result_label.config(text=f"Result = {result}") 
+    except:
+        messagebox.showerror("ERROR : INVALID INPUT")     
+
+
+root = Tk()
+root.title("simple calculator")
+root.geometry("300x300")
+root.configure(bg='#aaff00')
+
+
+
+Label(root,text="first number",).pack()
+entry1 = Entry(root  , width=20)
+entry1.pack(pady=5)
+
+Label(root,text="operation (+,-,/,*)",bg ="#f0f0f0").pack()
+operator = StringVar()
+operator.set("+")
+OptionMenu(root,operator,"+","-","*","/").pack()
+
+Label(root,text="second number").pack()
+entry2 = Entry(root)
+entry2.pack()
+
+Button(root,text = "calculate" ,command=calculate).pack()
+
+result_label = Label(root ,text="result")
+result_label.pack()
+root.mainloop()
